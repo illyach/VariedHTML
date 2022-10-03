@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)file:///Users/oskar9007/Desktop/programming/indexbook.html -->
+<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PD-24 Lupu Illya</title>
+    <style >
+
+    p {
+           font-family: sans-serif;
+           margin-left: 27px;
+    }
+
+    ul,h3 {
+        margin-left: 27px;
+
+    }
+
+    a {
+        margin-left: 27px;
+        font-family:'Courier New', Courier, monospace;
+        background:  #d5d5d5;
+    }
+
+    /* span {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    } */
+
+    img {
+        margin-left: 27px;
+        width: 33%;
+        margin-top: 0px ;
+
+    }
+/* 
+    table {
+        margin-left: 27px;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+            font-size: 14px;
+            border-collapse: collapse;
+            text-align: center;
+}
+th, td:first-child {
+    margin-left: 27px;
+
+background: #fffefe;
+
+padding: 10px 20px;
+}
+th, td {
+    margin-left: 27px;
+
+border-style: solid;
+border-width: 0 1px 1px 0;
+border-color: rgb(86, 86, 86);
+}
+td {
+    margin-left: 27px;
+
+background: #fcfcfd;
+}
+th:first-child, td:first-child {
+               margin-left: 27px;
+
+text-align: left;
+} */
+table {
+    width: 300px; /* Ширина таблицы */
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+    margin-left: 27px;
+   }
+   td, th {
+    padding: 3px; /* Поля вокруг содержимого таблицы */
+    border: 1px solid black; /* Параметры рамки */
+    margin-left: 27px;
+    white-space: nowrap;
+   }
+   th {
+    background: #fcfcfc;
+    margin-left: 27px;
+   }
+   
+        
+       
+      </style>
+    
+    
+</head>
+
+
+   
+<body>
+ <p style="margin-left:25px;  font-size: 1.7em;
+
+ ">     Просто об HTTP </p>
+
+ <ul style="margin-left:15px;" >
+    <li>Как отправить HTTP-запрос?</li>
+    <li>Как прочитать ответ?</li>
+    <li>А что с безопасностью?</li>
+    <li>А есть дополнительные возможности?</li>
+    <li>Что-то ещё, кстати, используют?</li>
+    <li>И что, всё?</li>
+
+ </ul>
+ 
+ <p >
+    Вашему вниманию предлагается описание основных аспектов протокола HTTP —
+    сетевого протокола, с начала 90-х и по сей день позволяющего вашему браузеру
+    загружать веб-страницы. Данная статья написана для тех, кто только начинает
+    работать с компьютерными сетями и заниматься разработкой сетевых приложений,
+    и кому пока что сложно самостоятельно читать официальные спецификации.</p>
+
+    <p ><strong>HTTP</strong> - широко распространённый протокол передачи данных, изначально
+        предназначенный для передачи гипертекстовых документов (то есть документов,
+        которые могут содержать ссылки, позволяющие организовать переход к другим
+        документам).</p> 
+    
+
+        <p>Аббревиатура HTTP расшифровывается как HyperText Transfer Protocol, «протокол
+            передачи гипертекста». В соответствии со спецификацией <span style="color:blueviolet">OSI</span>, HTTP является
+            протоколом прикладного (верхнего, 7-го) уровня. Версия протокола, HTTP 1.1,
+            описана в спецификации <span style="color:blueviolet">RFC 2616.</span></p>
+
+            <p>Протокол HTTP предполагает использование клиент-серверной структуры передачи
+                данных. Клиентское приложение формирует запрос и отправляет его на сервер,
+                после чего серверное программное обеспечение обрабатывает данный запрос,
+                формирует ответ и передаёт его обратно клиенту. После этого клиентское
+                приложение может продолжить отправлять другие запросы, которые будут
+                обработаны аналогичным образом.</p>
+
+                <p>Задача, которая традиционно решается с помощью протокола HTTP — обмен
+                    данными между пользовательским приложением, осуществляющим доступ к вебресурсам (обычно это веб-браузер) и веб-сервером. На данный момент именно
+                    благодаря протоколу HTTP обеспечивается работа Всемирной паутины.</p>
+
+
+                    <p>Также HTTP часто используется как протокол передачи информации для других
+                        протоколов прикладного уровня, таких как SOAP, XML-RPC и WebDAV. В таком
+                        случае говорят, что протокол HTTP используется как «транспорт».</p>
+
+                        <p>API многих программных продуктов также подразумевает использование HTTP для
+                            передачи данных — сами данные при этом могут иметь любой формат, например,
+                            XML или JSON.</p>
+
+                            <p>Как правило, передача данных по протоколу HTTP осуществляется через TCP/IPсоединения. Серверное программное обеспечение при этом обычно использует
+                                TCP-порт 80 (и, если порт не указан явно, то обычно клиентское программное 
+                                обеспечение по умолчанию использует именно 80-й порт для открываемых HTTPсоединений), хотя может использовать и любой другой.</p>
+
+                                <h3>ПРИМЕЧАНИЕ___________________________________________________________________________________________________________________________________________</h3>
+                                <h3>Версии HTTP</h3>
+                                <table>
+                                    <tr>
+                                      <th>Год</th>
+                                      <th>HTTP версия</th>
+                                      
+                                      </tr>
+                                     <tr>
+                                      <td>1991</td>
+                                      <td>0.9</td>
+                                      
+                                     </tr>
+                                    <tr>
+                                      <td>1996</td>
+                                      <td>1.0</td>
+                                      
+                                    </tr>
+                                    <tr>
+                                      <td>1997</td>
+                                      <td>1.1</td>
+                                      
+                                    </tr>
+                                    <tr>
+                                      <td>2015</td>
+                                      <td>2.0</td>
+                                      
+                                    </tr>
+                                    </table>
+
+                                        <h3>___________________________________________________________________________________________________________________________________________</h3>
+                                      
+                                        <p style="font-size:23px; ">Как отправить HTTP-запрос?</p>
+
+                                        <p>Самый простой способ разобраться с протоколом HTTP — это попробовать
+                                            обратиться к какому-нибудь веб-ресурсу вручную. Представьте, что вы браузер, и у
+                                            вас есть пользователь, который очень хочет прочитать статьи Анатолия Ализара.</p>
+
+                                            <p>Предположим, что он ввёл в адресной строке следующее:</p>
+
+                                            <p>Предположим, что он ввёл в адресной строке следующее:
+                                               </p>
+
+                                                <p style="font-family: 'Courier New', Courier, monospace;"> http://alizar.habrahabr.ru/</p>
+                                                <!-- im here alooo -->
+                                                <p>Для этого вы можете воспользоваться любой подходящей утилитой командной
+                                                    строки. Например, telnet:
+                                                    </p>
+
+                                                    <p style="font-family: 'Courier New', Courier, monospace;" >telnet alizar.habrahabr.ru 80</p>
+                                                    
+
+                                                    <p>Сразу уточню, что если вы вдруг передумаете, то нажмите Ctrl + «]», и затем ввод —
+                                                        это позволит вам закрыть HTTP-соединение. Помимо telnet можете попробовать nc
+                                                        (или ncat) — по вкусу.</p>
+
+                                                        <p>После того, как вы подключитесь к серверу, нужно отправить HTTP-запрос. Это,
+                                                            кстати, очень легко — HTTP-запросы могут состоять всего из двух строчек.</p>
+
+                                                            <p>Для того, чтобы сформировать HTTP-запрос, необходимо составить стартовую
+                                                                строку, а также задать по крайней мере один заголовок — это заголовок Host, 
+                                                                который является обязательным, и должен присутствовать в каждом запросе. Дело в
+                                                                том, что преобразование доменного имени в IP-адрес осуществляется на стороне
+                                                                клиента, и, соответственно, когда вы открываете TCP-соединение, то удалённый
+                                                                сервер не обладает никакой информацией о том, какой именно адрес использовался
+                                                                для соединения: это мог быть, например, адрес alizar.habrahabr.ru, habrahabr.ru или
+                                                                m.habrahabr.ru — и во всех этих случаях ответ может отличаться. Однако
+                                                                фактически сетевое соединение во всех случаях открывается с узлом 212.24.43.44, и
+                                                                даже если первоначально при открытии соединения был задан не этот IP-адрес, а
+                                                                какое-либо доменное имя, то сервер об этом никак не информируется — и именно
+                                                                поэтому этот адрес необходимо передать в заголовке Host.</p>
+
+                                                                <p>Стартовая (начальная) строка запроса для HTTP 1.1 составляется по следующей схеме:</p>
+
+                                                                <span style="color:blueviolet; margin-left: 27px;">Метод URI HTTP/Версия</span>
+
+                                                                    <p>Например (такая стартовая строка может указывать на то, что запрашивается
+                                                                        главная страница сайта):</p>
+                                                                        <!-- here -->
+                                                                        <p style="font-family: 'Courier New', Courier, monospace;">GET / HTTP/1.1</p>
+
+
+                                                                        <p><span>Метод</span> (в англоязычной тематической литературе используется слово method, а
+                                                                            также иногда слово verb — «глагол») представляет собой последовательность из
+                                                                            любых символов, кроме управляющих и разделителей, и определяет операцию,
+                                                                            которую нужно осуществить с указанным ресурсом. Спецификация HTTP 1.1 не
+                                                                            ограничивает количество разных методов, которые могут быть использованы,
+                                                                            однако в целях соответствия общим стандартам и сохранения совместимости с
+                                                                            максимально широким спектром программного обеспечения как правило
+                                                                            используются лишь некоторые, наиболее стандартные методы, смысл которых
+                                                                            однозначно раскрыт в спецификации протокола.</p>
+
+                                <table>
+                                    <tr>
+                                      <th>Метод</th>
+                                      <th>Назначение</th>
+                                      
+                                      </tr>
+                                     <tr>
+                                      <td>GET</td>
+                                      <td>Прочитать ресурс</td>
+                                      
+                                     </tr>
+                                    <tr>
+                                      <td>PUT</td>
+                                      <td>Создать ресурсу</td>
+                                      
+                                    </tr>
+                                    <tr>
+                                      <td>POST</td>
+                                      <td>Отредактировать данные ресурса</td>
+                                      
+                                    </tr>
+                                    <tr>
+                                      <td>DELETE</td>
+                                      <td>Удалить ресурс</td>
+                                      
+                                    </tr>
+                                    </table>
+
+                                    <p ><strong>URI</strong>(Uniform Resource Identifier, унифицированный идентификатор ресурса) — путь
+                                        до конкретного ресурса (например, документа), над которым необходимо
+                                        осуществить операцию (например, в случае использования метода GET
+                                        подразумевается получение ресурса). Некоторые запросы могут не относиться к
+                                        какому-либо ресурсу, в этом случае вместо URI в стартовую строку может быть
+                                        добавлена звёздочка (астериск, символ «*»). Например, это может быть запрос,
+                                        который относится к самому веб-серверу, а не какому-либо конкретному ресурсу. В этом случае стартовая строка может выглядеть так:</p> 
+                                        
+                                        <p style="font-family: 'Courier New', Courier, monospace;">OPTIONS * HTTP/1.1</p>
+                                        <p><strong>Версия</strong> определяет, в соответствии с какой версией стандарта HTTP составлен
+                                            запрос. Указывается как два числа, разделённых точкой (например <strong>1.1</strong>)</p>
+                                            <p>Для того, чтобы обратиться к веб-странице по определённому адресу (в данном
+                                                случае путь к ресурсу — это «/»), нам следует отправить следующий запрос:</p>
+
+                                               
+                                                    <p style="font-family: 'Courier New', Courier, monospace;">GET / HTTP/1.1
+                                                        Host: alizar.habrahabr.ru</p>
+                                                    
+
+                                                    <p> При этом учитывайте, что для переноса строки следует использовать символ
+                                                        возврата каретки (Carriage Return), за которым следует символ перевода строки
+                                                        (Line Feed). После объявления последнего заголовка последовательность символов
+                                                        для переноса строки добавляется дважды. </p>
+
+
+                                                    <p>Впрочем, в спецификации HTTP рекомендуется программировать HTTP-сервер
+                                                        таким образом, чтобы при обработке запросов в качестве межстрочного разделителя
+                                                        воспринимался символ LF, а предшествующий символ CR, при наличии такового,
+                                                        игнорировался. Соответственно, на практике бо́
+                                                        льшая часть серверов корректно
+                                                        обработает и такой запрос, где заголовки отделены символом LF, и он же дважды
+                                                        добавлен после объявления последнего заголовка.   </p>
+
+                                                        <p>Если вы хотите отправить запрос в точном соответствии со спецификацией, можете
+                                                            воспользоваться управляющими последовательностями \r и \n:</p>
+
+
+                                                            <p style="font-family: 'Courier New', Courier, monospace;">echo -en "GET / HTTP/1.1\r\nHost: alizar.habrahabr.ru\r\n\r\n" | ncat
+                                                                alizar.habrahabr.ru 80</p>
+                                                                
+
+                                                                <h3>ПРИМЕЧАНИЕ___________________________________________________________________________________________________________________________________________</h3>
+                                                                <p>Разберём адрес HTML документа в сети интернет чуть подробнее. Полный формат
+                                                                    выглядит так:</p>
+
+                                                                    <p style="font-family: 'Courier New', Courier, monospace; background: #eae9e9;">https://&lt;логин&gt;:&lt;пароль&gt;@&lt;хост&gt;:&lt;порт&gt;/&lt;путь&gt;?&lt;параметры&gt;#&lt;якорь&gt;</p>
+                                                                    
+                                                                    <p>Например:</p>
+                                                                    <p style="font-family: 'Courier New', Courier, monospace; background: #eae9e9;">https://mylogin:123456@google.com:443/search?text=метрика#results</p>
+
+                                                                    <table>
+                                                                        <tr>
+                                                                         <th>Параметр</th><th>Пример</th><th>Назначение</th>
+                                                                        </tr>
+                                                                        <tr>
+                                                                         <td><логин></td><td>mylogin</td><td>Имя пользователя для доступа к ресурсу (если
+                                                                            необходимо)</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                         <td><пароль></td><td>123456</td><td>Пароль для доступа к ресурсу (если необходим)</td>
+                                                                        </tr>
+                                                                        
+                                                                       </table>
+
+                                                                            <br>
+
+                                                                       <table>
+                                                                        <tr>
+                                                                         <th>Параметр</th><th>Пример</th><th>Назначение</th>
+                                                                        </tr>
+                                                                        <tr>
+                                                                         <td><хост></td><td>google.com</td><td>Доменное имя сервера (Domain Name), где
+                                                                            расположен ресурс</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                         <td><порт></td><td>443</td><td>Номер порта по которому доступен ресурс. По
+                                                                            умолчанию, 80 для HTTP и 443 для HTTPS – если
+                                                                            так, его можно не указывать. На одном и том же
+                                                                            сервере по разным портам можно получать
+                                                                            разные ресурсы.</td>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <td><путь></td><td>/search</td><td>Путь до ресурса. В примере, форма поиска по
+                                                                                Интернету. Это может быть HTML страницы или
+                                                                                файл</td>
+                                                                           </tr>
+
+                                                                           <tr>
+                                                                            <td><параметры></td><td>text=метрика</td><td>Параметры доступа к ресурсу. В примере,
+                                                                                запрос «метрика» в форму поиска.</td>
+                                                                           </tr>
+
+                                                                           <tr>
+                                                                         <td><якорь></td><td>results</td><td>Прокрутить страницу до элемента с id="results"</td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </tbody>
+                                                            </table>
+                                                                        <p>Как прочитать ответ?</p>
+
+                                                                        <p>Стартовая строка ответа имеет следующую структуру:</p>
+
+                                                                        <p>HTTP/<span style="color:blueviolet">Версия Код состояния Пояснение</span></p>
+
+                                                                        <p><span>Версия</span> протокола здесь задаётся так же, как в запросе.</p>
+                                                                        <p><span>Код состояния</span> (Status Code) — три цифры (первая из которых указывает на класс
+                                                                            состояния), которые определяют результат совершения запроса. Например, в
+                                                                            случае, если был использован метод GET, и сервер предоставляет ресурс с
+                                                                            указанным идентификатором, то такое состояние задаётся с помощью кода 200.
+                                                                            Если сервер сообщает о том, что такого ресурса не существует — 404. Если сервер
+                                                                            сообщает о том, что не может предоставить доступ к данному ресурсу по причине
+                                                                            отсутствия необходимых привилегий у клиента, то используется код 403.
+                                                                            Спецификация HTTP 1.1 определяет 40 различных кодов HTTP, а также допускается
+                                                                            расширение протокола и использование дополнительных кодов состояний</p>
+
+
+                                                                            <p><span>Пояснение</span> к коду состояния (Reason Phrase) — текстовое (но не включающее
+                                                                                символы CR и LF) пояснение к коду ответа, предназначено для упрощения чтения
+                                                                                ответа человеком. Пояснение может не учитываться клиентским программным
+                                                                                обеспечением, а также может отличаться от стандартного в некоторых реализациях
+                                                                                серверного ПО.</p>
+
+                                                                                <p>После стартовой строки следуют заголовки, а также тело ответа. Например:
+                                                                                </p>
+
+                                                                                <a >HTTP/1.1 200 OK</a>
+                                                                                <br>
+                                                                                <a>Server: nginx/1.2.1</a>
+                                                                                <br>
+                                                                                <a>Date: Sat, 08 Mar 2014 22:53:46 GMT</a>
+                                                                                <br>
+                                                                                <a>Content-Type: application/octet-stream</a>
+                                                                                <br>
+                                                                                <a >Content-Length: 7</a>
+                                                                                <br>
+                                                                                <a >Last-Modified: Sat, 08 Mar 2014 22:53:30 GMT</a>
+                                                                                <br>
+                                                                                <a >Connection: keep-alive</a>
+                                                                                <br>
+                                                                                <a >Accept-Ranges: bytes</a>
+                                                                                <br>
+                                                                                <a >Wisdom</a>
+                                                                     
+                                    <p>Тело ответа следует через два переноса строки после последнего заголовка. Для
+                                        определения окончания тела ответа используется значение заголовка <strong>Content-Length</strong> (в данном случае ответ содержит 7 восьмеричных байтов: слово «Wisdom» и
+                                        символ переноса строки).</p>
+                                    
+                                        <p>Но вот по тому запросу, который мы составили ранее, веб-сервер вернёт ответ не с
+                                            кодом 200, а с кодом 302. Таким образом он сообщает клиенту о том, что
+                                            обращаться к данному ресурсу на данный момент нужно по другому адресу.</p>
+
+
+                                            <p >Смотрите сами:</p>
+
+                                            <a >HTTP/1.1 302 Moved Temporarily</a>
+                                            <br>
+                                            <a>Server: nginx/1.2.1</a>
+                                            <br>
+                                            <a>Date: Sat, 08 Mar 2014 22:53:46 GMT</a>
+                                            <br>
+                                            <a>Content-Type: application/octet-stream</a>
+                                            <br>
+                                            <a >Content-Length: 7</a>
+                                            <br>
+                                            <a >Last-Modified: Sat, 08 Mar 2014 22:53:30 GMT</a>
+                                            <br>
+                                            <a >Connection: keep-alive</a>
+                                            <br>
+                                            <a >Accept-Ranges: bytes</a>
+                                            <br>
+                                            <a >Location: http://habrahabr.ru/users/alizar/</a>
+
+
+<br>
+                                            <br>
+                                            <a>&lt;html&gt;</a>
+                                            <br>
+                                            <a>&lt;head&gt; &lt;title&gt; 302 Found &lt;/title&gt; &lt;/head&gt;</a>
+                                            <br>
+                                            <a>&lt;body bgcolor="white" &gt;</a>
+                                            <br>
+                                            <a> &lt;center&gt; &lt;h1&gt; 302 Not Found   &lt;/h1&gt; &lt;/center&gt;</a>
+                                            <br>
+                                            <a>&lt;hr&gt; &lt;head&gt; nginx &lt;/head&gt; &lt;/hr&gt;</a>
+                                            <br>
+                                            <a>&lt;/body&gt;</a>
+                                            <br>
+                                            <a>&lt;/html&gt;</a>
+
+                                            <p>В заголовке Location передан новый адрес. Теперь URI (идентификатор ресурса)
+                                                изменился на /users/alizar/, а обращаться нужно на этот раз к серверу по адресу
+                                                habrahabr.ru (впрочем, в данном случае это тот же самый сервер), и его же
+                                                указывать в заголовке Host.</p>
+
+                                                <p>То есть:</p>
+
+                                                <p style="font-family: 'Courier New', Courier, monospace;">GET /users/alizar/ HTTP/1.1</p>
+                                                <p style="font-family: 'Courier New', Courier, monospace;">Host: habrahabr.ru</p>
+
+                                                <p>В ответ на этот запрос веб-сервер Хабрахабра уже выдаст ответ с кодом 200 и
+                                                    достаточно большой документ в формате HTML.</p>
+
+                                                    <p>Если вы уже успели вжиться в роль, то можете теперь прочитать полученный от
+                                                        сервера HTML-код, взять карандаш и блокнот, и нарисовать профайл Ализара — в
+                                                        принципе, именно этим бы на вашем месте браузер сейчас и занялся.</p>
+                                                        
+                                                        <p style="font-size:23px; margin-bottom: 0px;">А что с безопасностью?</p>
+                                                        <img src="data:image/png;base64,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" alt="">
+
+                                                        <p style="font-family: 'Courier New', Courier, monospace; text-align: center; margin-right: 530px;">HTTP vs HTTPS (https://seopressor.com/blog/http-vs-https/)</p>
+
+                                                        <p>Сам по себе протокол HTTP не предполагает использование шифрования для
+                                                            передачи информации. Тем не менее, для HTTP есть распространённое
+                                                            расширение, которое реализует упаковку передаваемых данных в
+                                                            криптографический протокол <span>SSL</span> или <span>TLS</span>.</p>
+
+                                                            <p>Название этого расширения — <span> HTTPS</span> (HyperText Transfer Protocol Secure). Для
+                                                                HTTPS-соединений обычно используется TCP-порт 443. HTTPS широко
+                                                                используется для защиты информации от перехвата, а также, как правило,
+                                                                обеспечивает защиту от атак вида <span>man-in-the-middle</span> — в том случае, если
+                                                                сертификат проверяется на клиенте, и при этом приватный ключ сертификата не
+                                                                был скомпрометирован, пользователь не подтверждал использование
+                                                                неподписанного сертификата, и на компьютере пользователя не были внедрены
+                                                                сертификаты центра сертификации злоумышленника.</p>
+
+                                                                <p>На данный момент HTTPS поддерживается всеми популярными веб-браузерами.</p>
+
+
+                                                                <p style="font-size:23px; ">А есть дополнительные возможности?</p>
+                                                                <p>Протокол HTTP предполагает достаточно большое количество возможностей для
+                                                                    расширения. В частности, спецификация HTTP 1.1 предполагает возможность
+                                                                    использования заголовка Upgrade для переключения на обмен данными по другому
+                                                                    протоколу. Запрос с таким заголовком отправляется клиентом. Если серверу
+                                                                    требуется произвести переход на обмен данными по другому протоколу, то он может
+                                                                    вернуть клиенту ответ со статусом «426 Upgrade Required», и в этом случае клиент
+                                                                    может отправить новый запрос, уже с заголовком Upgrade.</p>
+
+                                                                    <p>Такая возможность используется, в частности, для организации обмена данными по
+                                                                        протоколу WebSocket (протокол, описанный в спецификации  <span style="color:blueviolet">RFC 6455,</span>
+                                                                        позволяющий обеим сторонам передавать данные в нужный момент, без отправки
+                                                                        дополнительных HTTP-запросов): стандартное «рукопожатие» (handshake) сводится
+                                                                        к отправке HTTP-запроса с заголовком Upgrade, имеющим значение «websocket», на
+                                                                        который сервер возвращает ответ с состоянием «101 Switching Protocols», и далее
+                                                                        любая сторона может начать передавать данные уже по протоколу WebSocket.</p>    
+
+                                                                        <p style="font-size:23px; " >Что-то ещё, кстати, используют?</p>
+
+                                                                        <p>На данный момент существуют и другие протоколы, предназначенные для передачи
+                                                                            веб-содержимого. В частности, протокол <span>SPDY</span> (произносится как английское
+                                                                            слово speedy, не является аббревиатурой) является модификацией протокола
+                                                                            HTTP, цель которой — уменьшить задержки при загрузке веб-страниц, а также
+                                                                            обеспечить дополнительную безопасность.</p>
+
+                                                                            <p>Увеличение скорости обеспечивается посредством сжатия, приоритизации и
+                                                                                мультиплексирования дополнительных ресурсов, необходимых для веб-страницы,
+                                                                                чтобы все данные можно было передать в рамках одного соединения.</p>
+
+                                                                                <p>Опубликованный в ноябре 2012 года черновик спецификации протокола HTTP 2.0
+                                                                                    (следующая версия протокола HTTP после версии 1.1, окончательная спецификация
+                                                                                    для которой была опубликована в 1999) базируется на спецификации протокола
+                                                                                    SPDY.</p>
+
+                                                                                    <p>Многие архитектурные решения, используемые в протоколе SPDY, а также в других
+                                                                                        предложенных реализациях, которые рабочая группа httpbis рассматривала в ходе
+                                                                                        подготовки черновика спецификации HTTP 2.0, уже ранее были получены в ходе
+                                                                                        разработки протокола HTTP-NG, однако работы над протоколом HTTP-NG были
+                                                                                        прекращены в 1998.</p>
+
+                                                                                        <p>На данный момент поддержка протокола SPDY есть в браузерах Firefox,
+                                                                                            Chromium/Chrome, Opera, Internet Exporer и Amazon Silk.</p>
+
+                                                                                            <p style="font-size:23px; ">И что, всё?</p>
+
+                                                                                            <p>В общем-то, да. Можно было бы описать конкретные методы и заголовки, но
+                                                                                                фактически эти знания нужны скорее в том случае, если вы пишете что-то
+                                                                                                конкретное (например, веб-сервер или какое-то клиентское программное
+                                                                                                обеспечение, которое связывается с серверами через HTTP), и для базового
+                                                                                                понимания принципа работы протокола не требуются. К тому же, всё это вы можете
+                                                                                                очень легко найти через Google — эта информация есть и в спецификациях, и в
+                                                                                                Википедии, и много где ещё.</p>
+
+                                                                                                <p>Впрочем, если вы знаете английский и хотите углубиться в изучение не только
+                                                                                                    самого HTTP, но и используемых для передачи пакетов TCP/IP, то рекомендую
+                                                                                                    прочитать <a style="color:blueviolet;  background: none; font-family: sans-serif;" href="https://www.objc.io/issues/10-syncing-data/ip-tcp-http/">вот эту</a> статью.</p>
+
+
+
+<!-- </tbody>
+</table> -->
+
+
+
+
+
+
+
+
+
+</body></html>
